@@ -21,7 +21,7 @@ def adicionaBasedados(g):
                 file = open(pathfile, 'r')
                 x = file.readline()
                 enviadopor = ""
-                recebidopor = ""
+                recebidopor = []
                 acheienviado = False
                 acheirecebido = False
                 while True:
@@ -32,16 +32,21 @@ def adicionaBasedados(g):
                         enviadopor = y[1]
                         acheienviado = True
                     if y[0] == "To:":
+                        print(pathfile)
+                        for emails in y[1].split(","):
+                            print(y[1].split(","))
+                            print(emails)
+                            recebidopor.append(emails)
                         if file.readline().split()[0] == "Subject:":
-                            recebidopor = y[1]
                             if acheienviado:
                                 acheirecebido = True
                             break
                     x = file.readline()
                 if acheirecebido:
                     g.adiciona_vertice(enviadopor)
-                    g.adiciona_vertice(recebidopor)
-                    g.adiciona_aresta(enviadopor,recebidopor,1)
+                    for to in recebidopor:
+                        g.adiciona_vertice(to)
+                        g.adiciona_aresta(enviadopor,to,1)
 
 
 from collections import defaultdict
