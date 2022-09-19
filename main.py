@@ -24,7 +24,6 @@ def adicionaBasedados(g):
                 recebidopor = ""
                 acheienviado = False
                 acheirecebido = False
-                print(pathfile)
                 while True:
                     y = x.split()
                     if y==[]:
@@ -85,13 +84,10 @@ class Grafo:
         else:
             print(self.lista_adjacencia)
             for i in range(len(self.lista_adjacencia[u])):
-                print(u)
-                print(v)
-                print(i)
-                print(self.lista_adjacencia[u][i][0])
                 if self.lista_adjacencia[u][i][0] == v:
                     peso += self.lista_adjacencia[u][i][1]
                     self.lista_adjacencia[u].remove(self.lista_adjacencia[u][i])
+                    break
             self.lista_adjacencia[u].append((v, peso))
 
     def remove_aresta(self, u, v):
